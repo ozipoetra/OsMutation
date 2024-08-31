@@ -101,10 +101,10 @@ function read_lxc_template(){
 }
 
 function read_openvz_template(){
-    releasetag="v0.0.1"
-    os_list=$(wget -qO- "https://github.com/LloydAsp/OsMutation/releases/expanded_assets/v0.0.1" | \
-        sed -nE '/tar.gz/s/.*>([^<>]+)\.tar\.gz.*/\1/p' | \
-        grep -E "(debian)|(centos)|(alpine)" )
+    releasetag="v1.0.0"
+    os_list=$(wget -qO- "https://github.com/LloydAsp/OsMutation/releases/expanded_assets/v1.0.0" | \
+        sed -nE '/tar.xz/s/.*>([^<>]+)\.tar\.xz.*/\1/p' | \
+        grep -E "(debian)|(centos)|(alpine)|(almalinux)|(ubuntu)" )
     echo "$os_list" | nl
 
     while [ -z "${os_index##*[!0-9]*}" ]; 
@@ -114,7 +114,7 @@ function read_openvz_template(){
     done
 
     os_selected=$( echo "$os_list" | head -n $os_index | tail -n 1)
-    download_link="https://github.com/LloydAsp/OsMutation/releases/download/${releasetag}/${os_selected}.tar.gz"
+    download_link="https://github.com/ozipoetra/OsMutation/releases/download/${releasetag}/${os_selected}.tar.xz"
 }
 
 function download_rootfs(){
@@ -126,7 +126,7 @@ function download_rootfs(){
         wget -qO- $download_link | tar -C /x -xJv
     elif [ "$cttype" == 'openvz' ] ; then
         #rootfs.tar.gz
-        wget -qO- $download_link | tar -C /x -xzv
+        wget -qO- $download_link | tar -C /x -xJv
     elif [ "$cttype" == 'kvm' ] ; then
        echo "kvm is not supported by this script"
        exit 1
@@ -213,6 +213,18 @@ function post_install(){
             sed -i 's/--auto/-a/' /etc/init.d/networking # fix bug in networking script of lxc
         fi
     elif grep -qi debian /etc/issue; then
+        install ssh openssh nano wget curl
+        if [ "$cttype" == 'lxc' ] ; then
+            install ifupdown
+            systemctl disable systemd-networkd.service
+        fi
+    elif grep -qi ubuntu /etc/issue; then
+        install ssh openssh nano curl wget
+        if [ "$cttype" == 'lxc' ] ; then
+            install ifupdown
+            systemctl disable systemd-networkd.service
+        fi
+    elif grep -qi almalinux /etc/issue; then
         install ssh
         if [ "$cttype" == 'lxc' ] ; then
             install ifupdown
