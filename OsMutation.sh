@@ -232,7 +232,7 @@ function post_install(){
         fi
     elif grep -qi centos /etc/issue; then
         remove initscripts
-        install openssh initscripts-10.11.4-1.el9 ipcalc bc net-tools iptables nano wget curl
+        install openssh initscripts-10.11.4-1.el9 ipcalc bc net-tools iptables-services nano wget curl
 	rpm -ivh https://blog.racknerd.com/wp-content/uploads/2022/12/network-scripts-10.11.4-1.el9.x86_64.rpm
         if [ "$cttype" == 'lxc' ] ; then
             install ifupdown
