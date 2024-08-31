@@ -219,9 +219,9 @@ function post_install(){
             systemctl disable systemd-networkd.service
         fi
     elif grep -qi ubuntu /etc/issue; then
-        install ssh net-tools ifupdown
+        install ssh net-tools ifupdown iptables nano wget curl
         if [ "$cttype" == 'lxc' ] ; then
-            install ifupdown
+            install ifupdown 
             systemctl disable systemd-networkd.service
         fi
     elif grep -qi almalinux /etc/issue; then
