@@ -7,11 +7,11 @@ Reinstall Any OpenVZ/LXC VPS to Debian/CentOS/Alpine
 
 ## Usage
 ```
-wget -qO OsMutation.sh https://raw.githubusercontent.com/LloydAsp/OsMutation/main/OsMutation.sh && chmod u+x OsMutation.sh && ./OsMutation.sh
+wget -qO OsMutation.sh https://raw.githubusercontent.com/ozipoetra/OsMutation/main/OsMutation.sh && chmod u+x OsMutation.sh && ./OsMutation.sh
 ```
 or
 ```
-curl -so OsMutation.sh https://raw.githubusercontent.com/LloydAsp/OsMutation/main/OsMutation.sh && chmod u+x OsMutation.sh && ./OsMutation.sh
+curl -so OsMutation.sh https://raw.githubusercontent.com/ozipoetra/OsMutation/main/OsMutation.sh && chmod u+x OsMutation.sh && ./OsMutation.sh
 ```
 for vps whose disk is small (less than 1GiB, experimental support)
 
