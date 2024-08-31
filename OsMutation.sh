@@ -219,7 +219,7 @@ function post_install(){
             systemctl disable systemd-networkd.service
         fi
     elif grep -qi ubuntu /etc/issue; then
-        install ssh
+        install ssh net-tools ifupdown
         if [ "$cttype" == 'lxc' ] ; then
             install ifupdown
             systemctl disable systemd-networkd.service
