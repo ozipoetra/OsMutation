@@ -102,7 +102,7 @@ function read_lxc_template(){
 
 function read_openvz_template(){
     releasetag="v1.0.0"
-    os_list=$(wget -qO- "https://github.com/LloydAsp/OsMutation/releases/expanded_assets/v1.0.0" | \
+    os_list=$(wget -qO- "https://github.com/ozipoetra/OsMutation/releases/expanded_assets/v1.0.0" | \
         sed -nE '/tar.xz/s/.*>([^<>]+)\.tar\.xz.*/\1/p' | \
         grep -E "(debian)|(centos)|(alpine)|(almalinux)|(ubuntu)" )
     echo "$os_list" | nl
