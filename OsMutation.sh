@@ -213,9 +213,9 @@ function post_install(){
             sed -i 's/--auto/-a/' /etc/init.d/networking # fix bug in networking script of lxc
         fi
     elif grep -qi debian /etc/issue; then
-        install ssh
+        install ssh net-tools ifupdown iptables nano wget curl
         if [ "$cttype" == 'lxc' ] ; then
-            install ifupdown
+            install ifupdown 
             systemctl disable systemd-networkd.service
         fi
     elif grep -qi ubuntu /etc/issue; then
@@ -225,13 +225,13 @@ function post_install(){
             systemctl disable systemd-networkd.service
         fi
     elif grep -qi almalinux /etc/issue; then
-        install openssh
+        install openssh net-tools ifupdown iptables nano wget curl
         if [ "$cttype" == 'lxc' ] ; then
             install ifupdown
             systemctl disable systemd-networkd.service
         fi
     elif grep -qi centos /etc/issue; then
-        install openssh
+        install openssh net-tools ifupdown iptables nano wget curl
         if [ "$cttype" == 'lxc' ] ; then
             install ifupdown
             systemctl disable systemd-networkd.service
